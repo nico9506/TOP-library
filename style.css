@@ -1,0 +1,145 @@
+:root {
+    --color-theme-dark: #282424;
+    --color-theme-light: #d5cdcd;
+
+    --bar-horizontal-padding: 4rem;
+    --library-padding: 3rem;
+
+    --fs-title: 1.8rem;
+    --fs-author: 1.4rem;
+    --fs-pages: 1.2rem;
+    --fs-read: 1.2rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template: 5rem 1fr 3rem / 1fr;
+    grid-template-areas: 
+    "topnav"
+    "body"
+    "footer";
+}
+
+div {
+    border: 1px solid black;
+}
+
+/* --------------------- Top Nav ----------------------- */
+nav {
+    width: 100%;
+    background-color: var(--color-theme-dark);
+    color: var(--color-theme-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--bar-horizontal-padding);
+    grid-area: topnav;
+}
+
+nav .logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    font-size: 1.3rem;
+    margin: 0 1rem;
+}
+
+/* --------------------- Top Nav ----------------------- */
+
+
+
+/* --------------------- Library ----------------------- */
+.library-container {
+    grid-area: body;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.library-container .books-container {
+    width: min(90%, 1200px);
+    padding: var(--library-padding);
+    display: grid;
+    grid-template: auto / repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1rem;
+    align-content: flex-start;
+}
+
+.library-container .books-container .book {
+    width: 100%;
+    height: 200px;
+}
+
+.book-title, .book-author, .book-pages, .book-read {
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.book-title {
+    height: 40%;
+    background-color: var(--color-theme-dark);
+    color: var(--color-theme-light);
+    font-size: var(--fs-title);
+    font-weight: bold;
+}
+
+.book-author {
+    height: 30%;
+    font-size: var(--fs-author);
+    font-weight: bold;
+}
+
+.book-pages {
+    height: 15%;
+    font-size: var(--fs-pages);
+    font-weight: normal;
+}
+
+.book-pages::before {
+    content: "Number of pages: ";
+}
+
+.book-read {
+    height: 15%;
+    font-size: var(--fs-read);
+    font-weight: normal;
+}
+
+.book-read::before {
+    content: "Already read: ";
+}
+/* --------------------- Library ----------------------- */
+
+
+
+/* --------------------- Footer ----------------------- */
+footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--bar-horizontal-padding);
+    background-color: var(--color-theme-dark);
+    color: var(--color-theme-light);
+}
+
+footer .page-details {
+    text-align: right;
+}
+/* --------------------- Footer ----------------------- */
