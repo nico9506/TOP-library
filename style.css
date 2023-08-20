@@ -20,7 +20,7 @@
 body {
     height: 100vh;
     display: grid;
-    grid-template: 5rem 1fr 3rem / 1fr;
+    grid-template: 5rem calc(100vh - 8rem) 3rem / 1fr;
     grid-template-areas: 
     "topnav"
     "body"
@@ -69,6 +69,7 @@ nav ul li {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
+    overflow: auto;
 }
 
 .library-container .books-container {
@@ -78,6 +79,7 @@ nav ul li {
     grid-template: auto / repeat(auto-fill, minmax(350px, 1fr));
     gap: 1rem;
     align-content: flex-start;
+    height: fit-content;
 }
 
 .library-container .books-container .book {

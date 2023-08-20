@@ -1,4 +1,4 @@
-const library = [];
+const libraryArray = [];
 
 function Book(title, author, pages, isRead) {
     this.title = title;
@@ -32,4 +32,4 @@ const test = new Book("hpotter", "jkrowling", 444, true);
 console.log(test.getDetails());
 
 /* ----------------------------------------------------------------- */
-const library = document.getElementById('books-container');
+const libraryContainer = document.getElementById('books-container');
