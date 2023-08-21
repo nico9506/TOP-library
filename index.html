@@ -1,126 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Library</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav>
-        <span class="logo">Personal Library</span>
-        <ul>
-            <li>Add new Book</li>
-            <li>Sort</li>
-            <li>Filter</li>
-        </ul>
-    </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Personal Library</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav>
+            <span class="logo">Personal Library</span>
+            <ul>
+                <li>
+                    <span class="btn-add-book" id="btn-add-book">
+                        Add new Book
+                    </span>
+                </li>
+                <li>Sort</li>
+                <li>Filter</li>
+            </ul>
+        </nav>
 
-    <div id="library-container" class="library-container">
-        <div class="books-container">
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
-
-            <div class="book">
-                <div class="book-title">Lord of the Rings</div>
-                <div class="book-author">JR Tolkien</div>
-                <div class="book-pages">1234</div>
-                <div class="book-read">No</div>
-            </div>
+        <div id="library-container" class="library-container">
+            <div class="books-container"></div>
         </div>
-    </div>
 
-    <footer>
-        <div class="github-contact">
-            <a href="https://www.github.com/nico9506">nico9506</a>
-        </div>
-        <div class="page-details">
-            <h3>Copyright © Nicolas Lopez</h3>
-            <p class="editing-date">Aug 20, 2023</p>
-        </div>
-    </footer>
+        <footer>
+            <div class="github-contact">
+                <a target="_blank" href="https://www.github.com/nico9506"
+                    >nico9506</a
+                >
+            </div>
+            <div class="page-details">
+                <h3>Copyright © Nicolas Lopez</h3>
+                <p class="editing-date">Aug 20, 2023</p>
+            </div>
+        </footer>
 
-    <script src="main.js"></script>
-</body>
+        <!-- ------------ Popup menu to add a new book -------------------- -->
+        <div id="popup" class="popup-new-book">
+            <label for="input-title">Title:</label>
+            <input type="text" id="input-title" name="input-title" />
+
+            <label for="input-author">Author:</label>
+            <input type="text" name="input-author" id="input-author" />
+
+            <label for="input-pages">Number of pages:</label>
+            <input
+                type="text"
+                name="input-pages"
+                id="input-pages"
+                minlength="1"
+                maxlength="6"
+                v-model="form.availability"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+            />
+
+            <label for="input-read"
+                >Book read:
+                <input type="checkbox" name="input-read" id="input-read"
+            /></label>
+
+            <span class="popup-btn-container"
+                ><button id="btn-popup-add-book" type="button">Add book</button
+                ><button id="btn-popup-cancel" type="button">
+                    Cancel
+                </button></span
+            >
+        </div>
+
+        <script src="main.js"></script>
+    </body>
 </html>

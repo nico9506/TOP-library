@@ -21,10 +21,10 @@ body {
     height: 100vh;
     display: grid;
     grid-template: 5rem calc(100vh - 8rem) 3rem / 1fr;
-    grid-template-areas: 
-    "topnav"
-    "body"
-    "footer";
+    grid-template-areas:
+        "topnav"
+        "body"
+        "footer";
 }
 
 div {
@@ -59,9 +59,14 @@ nav ul li {
     margin: 0 1rem;
 }
 
+.btn-add-book:hover {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    color: white;
+}
+
 /* --------------------- Top Nav ----------------------- */
-
-
 
 /* --------------------- Library ----------------------- */
 .library-container {
@@ -87,7 +92,10 @@ nav ul li {
     height: 200px;
 }
 
-.book-title, .book-author, .book-pages, .book-read {
+.book-title,
+.book-author,
+.book-pages,
+.book-read {
     padding-left: 1rem;
     display: flex;
     align-items: center;
@@ -128,8 +136,6 @@ nav ul li {
 }
 /* --------------------- Library ----------------------- */
 
-
-
 /* --------------------- Footer ----------------------- */
 footer {
     grid-area: footer;
@@ -145,3 +151,63 @@ footer .page-details {
     text-align: right;
 }
 /* --------------------- Footer ----------------------- */
+
+
+
+/* --------------------- Popup Create New Book ----------------------- */
+.popup-new-book {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 350px;
+    height: 400px;
+    display: grid;
+    grid-template: repeat(7, 1fr) 2fr / 1fr;
+    padding: 1rem;
+    background-color: var(--color-theme-dark);
+    color: var(--color-theme-light);
+    border-radius: 10px;
+    visibility: hidden;
+    z-index: 1;
+    box-shadow: 0 0 5px 5px var(--color-theme-dark);
+}
+
+.show {
+    visibility: visible;
+    animation: fadeIn 0.5s;
+}
+
+/*Add animation (fade in in the popup)*/
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.popup-new-book label {
+    font-size: 1.3rem;
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+.popup-new-book input {
+    font-size: 1.5rem;
+}
+
+.popup-new-book .popup-btn-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+
+.popup-new-book .popup-btn-container button {
+    height: 2.5rem;
+    align-self: center;
+    width: 100%;
+}
+
+
+/* --------------------- Popup Create New Book ----------------------- */

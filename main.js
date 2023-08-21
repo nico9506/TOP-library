@@ -33,3 +33,31 @@ console.log(test.getDetails());
 
 /* ----------------------------------------------------------------- */
 const libraryContainer = document.getElementById('books-container');
+const popup = document.getElementById("popup");
+
+const addNewBook = document.getElementById('btn-add-book');
+addNewBook.addEventListener("click", toggleShowClass);
+
+let inputTitle = document.getElementById("input-title");
+let inputAuthor = document.getElementById("input-author");
+let inputPages = document.getElementById("input-pages");
+let inputRead = document.getElementById("input-read");
+
+const btnPopupCancel = document.getElementById("btn-popup-cancel");
+btnPopupCancel.addEventListener("click", cleanFieldsAndToggle);
+
+function toggleShowClass() {
+    popup.classList.toggle("show");
+}
+
+function cleanPopupFields() {
+    inputTitle.value = "";
+    inputAuthor.value = "";
+    inputPages.value = "";
+    inputRead.checked = false;
+}
+
+function cleanFieldsAndToggle() {
+    cleanPopupFields();
+    toggleShowClass();
+}
