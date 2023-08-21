@@ -23,14 +23,46 @@ Book.prototype.getDetails = function () {
     );
 };
 
-// function addBookToLibrary [
-
-// ]
-
+/* Testing */
 const test = new Book("hpotter", "jkrowling", 444, true);
+const test2 = new Book("New World Order", "Ray Dalio", 654, false);
+libraryArray.push(test);
+libraryArray.push(test2);
+
+libraryArray.forEach(book => {
+    const booksContainer = document.getElementById("books-container");
+
+    const bookContainer = document.createElement("div");
+    bookContainer.classList.add("book");
+
+    const bookTitle = document.createElement("div");
+    bookTitle.classList.add("book-title");
+    bookTitle.textContent = book.title;
+
+    const bookAuthor = document.createElement("div");
+    bookAuthor.classList.add("book-author");
+    bookAuthor.textContent = book.author;
+
+    const bookPages = document.createElement("div");
+    bookPages.classList.add("book-pages");
+    bookPages.textContent = book.pages;
+
+    const bookRead = document.createElement("div");
+    bookRead.classList.add("book-read");
+    bookRead.textContent = book.isRead;
+
+    booksContainer.appendChild(bookContainer);
+    bookContainer.appendChild(bookTitle);
+    bookContainer.appendChild(bookAuthor);
+    bookContainer.appendChild(bookPages);
+    bookContainer.appendChild(bookRead);
+});
+
 
 console.log(test.getDetails());
 
+/* ----------------------------------------------------------------- */
+/* ------------------- Webpage Functionalities --------------------- */
 /* ----------------------------------------------------------------- */
 const libraryContainer = document.getElementById('books-container');
 const popup = document.getElementById("popup");
@@ -61,3 +93,15 @@ function cleanFieldsAndToggle() {
     cleanPopupFields();
     toggleShowClass();
 }
+
+function addBookToLibraryArray() {
+    const newTitle = document.getElementById("input-title").value;
+    const newAuthor = document.getElementById("input-author").value;
+    const newPages = document.getElementById("input-pages").value;
+    const newRead = document.getElementById("input-read").checked;
+
+    const newBook = new Book(newTitle, newAuthor, newPages, newRead);
+
+    libraryArray.push(newBook);
+}
+    

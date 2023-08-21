@@ -96,7 +96,7 @@ nav ul li {
 .book-author,
 .book-pages,
 .book-read {
-    padding-left: 1rem;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
 }
@@ -107,6 +107,7 @@ nav ul li {
     color: var(--color-theme-light);
     font-size: var(--fs-title);
     font-weight: bold;
+    justify-content: space-between;
 }
 
 .book-author {
@@ -123,6 +124,7 @@ nav ul li {
 
 .book-pages::before {
     content: "Number of pages: ";
+    margin-right: 4px;
 }
 
 .book-read {
@@ -133,6 +135,7 @@ nav ul li {
 
 .book-read::before {
     content: "Already read: ";
+    margin-right: 4px;
 }
 /* --------------------- Library ----------------------- */
 
