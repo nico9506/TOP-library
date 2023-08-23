@@ -212,5 +212,13 @@ footer .page-details {
     width: 100%;
 }
 
+/*field validation in addBookToLibraryArray()*/
+.field-required::after {
+    content: " *";
+    color: var(--color-theme-light);
+}
 
+.input-required {
+    background-color: pink;
+}
 /* --------------------- Popup Create New Book ----------------------- */

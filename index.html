@@ -20,16 +20,17 @@
             </ul>
         </nav>
 
-        <div class="library-container">
+        <div id="library-container" class="library-container">
             <div id="books-container" class="books-container">
-                <div class="book">
+                <!-- Basic Book Structure -->
+                <!-- <div class="book">
                     <div class="book-title">
                         Fahrenheit 451 <button>Delete</button>
                     </div>
                     <div class="book-author">Ray Bradbury</div>
                     <div class="book-pages">234</div>
                     <div class="book-read">No</div>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -47,13 +48,18 @@
 
         <!-- ------------ Popup menu to add a new book -------------------- -->
         <div id="popup" class="popup-new-book">
-            <label for="input-title">Title:</label>
-            <input type="text" id="input-title" name="input-title" />
+            <label class="field-required" for="input-title">Title</label>
+            <input
+                type="text"
+                id="input-title"
+                name="input-title"
+                placeholder="Name required"
+            />
 
-            <label for="input-author">Author:</label>
+            <label for="input-author">Author</label>
             <input type="text" name="input-author" id="input-author" />
 
-            <label for="input-pages">Number of pages:</label>
+            <label for="input-pages">Number of pages</label>
             <input
                 type="text"
                 name="input-pages"
@@ -65,7 +71,7 @@
             />
 
             <label for="input-read"
-                >Book read:
+                >Book read
                 <input type="checkbox" name="input-read" id="input-read"
             /></label>
 

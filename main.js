@@ -29,79 +29,104 @@ const test2 = new Book("New World Order", "Ray Dalio", 654, false);
 libraryArray.push(test);
 libraryArray.push(test2);
 
-libraryArray.forEach(book => {
-    const booksContainer = document.getElementById("books-container");
-
-    const bookContainer = document.createElement("div");
-    bookContainer.classList.add("book");
-
-    const bookTitle = document.createElement("div");
-    bookTitle.classList.add("book-title");
-    bookTitle.textContent = book.title;
-
-    const bookAuthor = document.createElement("div");
-    bookAuthor.classList.add("book-author");
-    bookAuthor.textContent = book.author;
-
-    const bookPages = document.createElement("div");
-    bookPages.classList.add("book-pages");
-    bookPages.textContent = book.pages;
-
-    const bookRead = document.createElement("div");
-    bookRead.classList.add("book-read");
-    bookRead.textContent = book.isRead;
-
-    booksContainer.appendChild(bookContainer);
-    bookContainer.appendChild(bookTitle);
-    bookContainer.appendChild(bookAuthor);
-    bookContainer.appendChild(bookPages);
-    bookContainer.appendChild(bookRead);
-});
-
-
 console.log(test.getDetails());
+
+/* First call of function to initialize the library display */
+refreshLibrary();
+/* -------------------------------------------------------- */
 
 /* ----------------------------------------------------------------- */
 /* ------------------- Webpage Functionalities --------------------- */
 /* ----------------------------------------------------------------- */
-const libraryContainer = document.getElementById('books-container');
+const libraryContainer = document.getElementById("books-container");
 const popup = document.getElementById("popup");
 
-const addNewBook = document.getElementById('btn-add-book');
-addNewBook.addEventListener("click", toggleShowClass);
+const addNewBook = document.getElementById("btn-add-book");
+addNewBook.addEventListener("click", cleanFieldsAndToggle);
 
 let inputTitle = document.getElementById("input-title");
 let inputAuthor = document.getElementById("input-author");
 let inputPages = document.getElementById("input-pages");
 let inputRead = document.getElementById("input-read");
 
+const btnPopupAdd = document.getElementById("btn-popup-add-book");
+btnPopupAdd.addEventListener("click", addBookToLibraryArray);
+
 const btnPopupCancel = document.getElementById("btn-popup-cancel");
 btnPopupCancel.addEventListener("click", cleanFieldsAndToggle);
 
-function toggleShowClass() {
-    popup.classList.toggle("show");
-}
-
-function cleanPopupFields() {
+function cleanFieldsAndToggle() {
     inputTitle.value = "";
     inputAuthor.value = "";
     inputPages.value = "";
     inputRead.checked = false;
-}
 
-function cleanFieldsAndToggle() {
-    cleanPopupFields();
-    toggleShowClass();
+    popup.classList.toggle("show");
+
+    const newTitle = document.getElementById("input-title");
+    newTitle.classList.remove("input-required");
 }
 
 function addBookToLibraryArray() {
-    const newTitle = document.getElementById("input-title").value;
-    const newAuthor = document.getElementById("input-author").value;
-    const newPages = document.getElementById("input-pages").value;
+    const newTitle = document.getElementById("input-title");
+    let newAuthor = document.getElementById("input-author").value;
+    let newPages = document.getElementById("input-pages").value;
     const newRead = document.getElementById("input-read").checked;
 
-    const newBook = new Book(newTitle, newAuthor, newPages, newRead);
+    if (newAuthor.length < 1) newAuthor = "Unknown";
+    if (newPages.length < 1) newPages = "Unknown";
 
-    libraryArray.push(newBook);
+    if (newTitle.value.length < 1) {
+        newTitle.focus();
+        newTitle.classList.toggle("input-required");
+    } else {
+        const newBook = new Book(newTitle.value, newAuthor, newPages, newRead);
+        libraryArray.push(newBook);
+        cleanFieldsAndToggle();
+        refreshLibrary();
+    }
 }
-    
+
+function refreshLibrary() {
+    /**Refresh and shows items in the interface */
+
+    const libraryContainer = document.getElementById("library-container");
+
+    /* Delete the current books container including its child elements */
+    const oldBooksContainer = document.getElementById("books-container");
+    oldBooksContainer.remove();
+
+    /* Create a new container to add the updated collection 
+    from the libraryArray */
+    const booksContainer = document.createElement("div");
+    booksContainer.classList.add("books-container");
+    booksContainer.setAttribute("id", "books-container");
+    libraryContainer.appendChild(booksContainer);
+
+    libraryArray.forEach((book) => {
+        const bookContainer = document.createElement("div");
+        bookContainer.classList.add("book");
+
+        const bookTitle = document.createElement("div");
+        bookTitle.classList.add("book-title");
+        bookTitle.textContent = book.title;
+
+        const bookAuthor = document.createElement("div");
+        bookAuthor.classList.add("book-author");
+        bookAuthor.textContent = book.author;
+
+        const bookPages = document.createElement("div");
+        bookPages.classList.add("book-pages");
+        bookPages.textContent = book.pages;
+
+        const bookRead = document.createElement("div");
+        bookRead.classList.add("book-read");
+        bookRead.textContent = book.isRead;
+
+        booksContainer.appendChild(bookContainer);
+        bookContainer.appendChild(bookTitle);
+        bookContainer.appendChild(bookAuthor);
+        bookContainer.appendChild(bookPages);
+        bookContainer.appendChild(bookRead);
+    });
+}
