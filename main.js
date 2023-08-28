@@ -7,29 +7,39 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
 }
 
-Book.prototype.getDetails = function () {
-    return (
-        "Title: " +
-        this.title +
-        "\n" +
-        "Author: " +
-        this.author +
-        "\n" +
-        "Number of pages: " +
-        this.pages +
-        "\n" +
-        "Has this book been read?: " +
-        this.isRead
-    );
-};
+// Book.prototype.getDetails = function () {
+//     return (
+//         "Title: " +
+//         this.title +
+//         "\n" +
+//         "Author: " +
+//         this.author +
+//         "\n" +
+//         "Number of pages: " +
+//         this.pages +
+//         "\n" +
+//         "Has this book been read?: " +
+//         this.isRead
+//     );
+// };
 
 /* Testing */
-const test = new Book("hpotter", "jkrowling", 444, true);
-const test2 = new Book("New World Order", "Ray Dalio", 654, false);
+const test = new Book(
+    "Harry Potter and the Philosopher's Stone",
+    "J. K. Rowling",
+    223,
+    true
+);
+const test2 = new Book(
+    "Principles for Dealing with the Changing World Order",
+    "Ray Dalio",
+    336,
+    false
+);
 libraryArray.push(test);
 libraryArray.push(test2);
 
-console.log(test.getDetails());
+// console.log(test.getDetails());
 
 /* First call of function to initialize the library display */
 refreshLibrary();
@@ -56,6 +66,10 @@ const btnPopupCancel = document.getElementById("btn-popup-cancel");
 btnPopupCancel.addEventListener("click", cleanFieldsAndToggle);
 
 function cleanFieldsAndToggle() {
+    /**
+     * Clean fields from the popup form and remove the class input-required.
+     * Necessary action to get an empty form once the popup window is open again.
+     */
     inputTitle.value = "";
     inputAuthor.value = "";
     inputPages.value = "";
@@ -68,6 +82,10 @@ function cleanFieldsAndToggle() {
 }
 
 function addBookToLibraryArray() {
+    /**
+     * Create a new Book instance from the input form fields and save it in
+     * the LibraryArray
+     */
     const newTitle = document.getElementById("input-title");
     let newAuthor = document.getElementById("input-author").value;
     let newPages = document.getElementById("input-pages").value;
@@ -109,11 +127,19 @@ function refreshLibrary() {
 
         const bookTitle = document.createElement("div");
         bookTitle.classList.add("book-title");
-        bookTitle.textContent = book.title;
+        bookTitle.textContent =
+            book.title.length > 40
+                ? book.title.slice(0, 39) + "..."
+                : book.title;
+        bookTitle.setAttribute("title", book.title);
 
         const bookAuthor = document.createElement("div");
         bookAuthor.classList.add("book-author");
-        bookAuthor.textContent = book.author;
+        bookAuthor.textContent =
+            book.author.length > 25
+                ? book.author.slice(0, 24) + "..."
+                : book.author;
+        bookAuthor.setAttribute("title", book.author);
 
         const bookPages = document.createElement("div");
         bookPages.classList.add("book-pages");

@@ -108,6 +108,11 @@ nav ul li {
     font-size: var(--fs-title);
     font-weight: bold;
     justify-content: space-between;
+
+    /*To prevent long single words to overlap the title box*/
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .book-author {
