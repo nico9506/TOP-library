@@ -171,11 +171,23 @@ function refreshLibrary() {
         bookRead.classList.add("book-read");
         bookRead.textContent = book.isRead;
 
+        const bookActions = document.createElement("div");
+        bookActions.classList.add("book-actions");
+        const btnEditBook = document.createElement("button");
+        btnEditBook.textContent = "Edit";
+        const btnDeleteBook = document.createElement("button");
+        btnDeleteBook.textContent = "Delete";
+        btnDeleteBook.addEventListener("click", deleteBook);
+
         booksContainer.appendChild(bookContainer);
         bookContainer.appendChild(bookTitle);
         bookContainer.appendChild(bookAuthor);
         bookContainer.appendChild(bookPages);
         bookContainer.appendChild(bookRead);
+        bookContainer.appendChild(bookActions);
+
+        bookActions.appendChild(btnEditBook);
+        bookActions.appendChild(btnDeleteBook);
     });
 }
 
@@ -224,3 +236,18 @@ function sortLibrary() {
         libraryArray.reverse();
     }
 }
+
+function deleteBook() {
+    libraryArray.splice(
+        libraryArray.indexOf(
+            libraryArray.find(({ title }) =>
+                title.toLowerCase().includes(this.title)
+            )
+        ),
+        1
+    );
+
+    refreshLibrary();
+}
+
+/*libraryArray.indexOf(libraryArray.find(({ title }) => title.toLowerCase().includes("potter")));*/
