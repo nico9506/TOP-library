@@ -57,13 +57,40 @@ nav ul {
 nav ul li {
     font-size: 1.3rem;
     margin: 0 1rem;
+    font-weight: bold;
 }
 
-.btn-add-book:hover {
+.btn-nav:hover {
     cursor: pointer;
-    font-weight: bold;
     user-select: none;
     color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--color-theme-dark);
+    color: var(--color-theme-light);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    font-weight: normal;
+    width: 11rem;
+}
+
+#btn-sort:hover .dropdown-content {
+    display: block;
+    padding: 0 0.5rem;
+    animation: fadeIn 0.5s;
+}
+
+#btn-sort:hover .dropdown-content span {
+    display: block;
+}
+
+#btn-sort:hover .dropdown-content span:hover {
+    /* font-weight: bold; */
+    color: white;
+    /* text-shadow: 0 0 2px 5px white; */
 }
 
 /* --------------------- Top Nav ----------------------- */
@@ -160,8 +187,6 @@ footer .page-details {
 }
 /* --------------------- Footer ----------------------- */
 
-
-
 /* --------------------- Popup Create New Book ----------------------- */
 .popup-new-book {
     position: absolute;
@@ -190,8 +215,12 @@ footer .page-details {
 
 /*Add animation (fade in in the popup)*/
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .popup-new-book label {

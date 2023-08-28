@@ -11,12 +11,28 @@
             <span class="logo">Personal Library</span>
             <ul>
                 <li>
-                    <span class="btn-add-book" id="btn-add-book">
+                    <span class="btn-nav" id="btn-add-book">
                         Add new Book
                     </span>
                 </li>
-                <li>Sort</li>
-                <li>Filter</li>
+                <li>
+                    <div class="btn-nav" id="btn-sort">
+                        <span>Sort</span>
+                        <div class="dropdown-content">
+                            <span class="sort-btn" id="sort-asc">Ascendant</span>
+                            <span class="sort-btn" id="sort-des">Descendant</span>
+                            <hr />
+                            <h4>Sort by</h4>
+                            <span class="sort-btn" id="sort-title">Title</span>
+                            <span class="sort-btn" id="sort-author">Author</span>
+                            <span class="sort-btn" id="sort-pages">Number of Pages</span>
+                            <span class="sort-btn" id="sort-read">Already Read</span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="btn-nav" id="btn-filter">Filter</div>
+                </li>
             </ul>
         </nav>
 

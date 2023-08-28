@@ -23,6 +23,12 @@ function Book(title, author, pages, isRead) {
 //     );
 // };
 
+/**
+ * Global variables linked to the sort functions
+ */
+let sortAsc = true;
+let sortBy = "title"; //title, author, pages, read
+
 /* Testing */
 const test = new Book(
     "Harry Potter and the Philosopher's Stone",
@@ -36,8 +42,15 @@ const test2 = new Book(
     336,
     false
 );
+const test3 = new Book(
+    "Sorting array of objects",
+    "developer.mozilla.org",
+    36,
+    true
+);
 libraryArray.push(test);
 libraryArray.push(test2);
+libraryArray.push(test3);
 
 // console.log(test.getDetails());
 
@@ -64,6 +77,13 @@ btnPopupAdd.addEventListener("click", addBookToLibraryArray);
 
 const btnPopupCancel = document.getElementById("btn-popup-cancel");
 btnPopupCancel.addEventListener("click", cleanFieldsAndToggle);
+
+/**
+ * Add functionality to the sorting buttons in the navbar
+ */
+[...document.getElementsByClassName("sort-btn")].forEach((btn) => {
+    btn.addEventListener("click", setSortingVariables);
+});
 
 function cleanFieldsAndToggle() {
     /**
@@ -121,6 +141,8 @@ function refreshLibrary() {
     booksContainer.setAttribute("id", "books-container");
     libraryContainer.appendChild(booksContainer);
 
+    //Sort the array before printing it
+    sortLibrary();
     libraryArray.forEach((book) => {
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("book");
@@ -155,4 +177,50 @@ function refreshLibrary() {
         bookContainer.appendChild(bookPages);
         bookContainer.appendChild(bookRead);
     });
+}
+
+function setSortingVariables(e) {
+    switch (e.target.id) {
+        case "sort-asc":
+            sortAsc = true;
+            break;
+        case "sort-des":
+            sortAsc = false;
+            break;
+        case "sort-title":
+            sortBy = "title";
+            break;
+        case "sort-author":
+            sortBy = "author";
+            break;
+        case "sort-pages":
+            sortBy = "pages";
+            break;
+        case "sort-read":
+            sortBy = "read";
+            break;
+        default:
+            break;
+    }
+
+    refreshLibrary();
+    console.log("click within setSortingVariables function: " + e.target.id);
+}
+
+function sortLibrary() {
+    libraryArray.sort((a, b) => {
+        const valA =
+            typeof a[sortBy] == "string" ? a[sortBy].toUpperCase() : a[sortBy]; // ignore upper and lowercase
+        const valB =
+            typeof b[sortBy] == "string" ? b[sortBy].toUpperCase() : b[sortBy]; // ignore upper and lowercase
+        if (valA < valB) return -1;
+        if (valA > valB) return 1;
+
+        // values must be equal
+        return 0;
+    });
+
+    if (!sortAsc) {
+        libraryArray.reverse();
+    }
 }
