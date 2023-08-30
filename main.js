@@ -1,10 +1,18 @@
 const libraryArray = [];
 
+function uniqueID() {
+    /**
+     * Generates an unique ID. Used to identify each book object
+     */
+    return Math.floor(Math.random() * Date.now());
+}
+
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
+    this.id = uniqueID();
 }
 
 // Book.prototype.getDetails = function () {
@@ -177,6 +185,8 @@ function refreshLibrary() {
         btnEditBook.textContent = "Edit";
         const btnDeleteBook = document.createElement("button");
         btnDeleteBook.textContent = "Delete";
+        //The unique book id is saved also as this btn id
+        btnDeleteBook.setAttribute("bookId", book.id); 
         btnDeleteBook.addEventListener("click", deleteBook);
 
         booksContainer.appendChild(bookContainer);
@@ -238,10 +248,14 @@ function sortLibrary() {
 }
 
 function deleteBook() {
+    /**
+     * Remove the book with the same ID of the called DeleteButton (bookId) 
+     * from the libraryArray
+     */
     libraryArray.splice(
         libraryArray.indexOf(
-            libraryArray.find(({ title }) =>
-                title.toLowerCase().includes(this.title)
+            libraryArray.find(({ id }) =>
+                id == this.getAttribute("bookId")
             )
         ),
         1
@@ -250,4 +264,3 @@ function deleteBook() {
     refreshLibrary();
 }
 
-/*libraryArray.indexOf(libraryArray.find(({ title }) => title.toLowerCase().includes("potter")));*/
