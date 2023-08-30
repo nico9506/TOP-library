@@ -1,4 +1,5 @@
 const libraryArray = [];
+let bookToEdit = undefined;
 
 function uniqueID() {
     /**
@@ -80,8 +81,8 @@ let inputAuthor = document.getElementById("input-author");
 let inputPages = document.getElementById("input-pages");
 let inputRead = document.getElementById("input-read");
 
-const btnPopupAdd = document.getElementById("btn-popup-add-book");
-btnPopupAdd.addEventListener("click", addBookToLibraryArray);
+const btnPopupAdd = document.getElementById("btn-popup-save-book");
+btnPopupAdd.addEventListener("click", updateLibraryArray);
 
 const btnPopupCancel = document.getElementById("btn-popup-cancel");
 btnPopupCancel.addEventListener("click", cleanFieldsAndToggle);
@@ -105,32 +106,42 @@ function cleanFieldsAndToggle() {
 
     popup.classList.toggle("show");
 
-    const newTitle = document.getElementById("input-title");
-    newTitle.classList.remove("input-required");
+    inputTitle.classList.remove("input-required");
 }
 
-function addBookToLibraryArray() {
+function updateLibraryArray() {
     /**
-     * Create a new Book instance from the input form fields and save it in
-     * the LibraryArray
+     * Create or modify a Book instance from the input form fields and save
+     * it in the LibraryArray
      */
-    const newTitle = document.getElementById("input-title");
-    let newAuthor = document.getElementById("input-author").value;
-    let newPages = document.getElementById("input-pages").value;
-    const newRead = document.getElementById("input-read").checked;
 
-    if (newAuthor.length < 1) newAuthor = "Unknown";
-    if (newPages.length < 1) newPages = "Unknown";
+    if (inputAuthor.value.length < 1) inputAuthor.value = "Unknown";
+    if (inputPages.value.length < 1) inputPages.value = undefined;
 
-    if (newTitle.value.length < 1) {
-        newTitle.focus();
-        newTitle.classList.toggle("input-required");
+    if (inputTitle.value.length < 1) {
+        inputTitle.focus();
+        inputTitle.classList.toggle("input-required");
+    } else if (bookToEdit !== undefined) {
+        //Check if the object exists before trying to edit it
+        bookToEdit.title = inputTitle.value;
+        bookToEdit.author = inputAuthor.value;
+        bookToEdit.pages = inputPages.value;
+        bookToEdit.isRead = inputRead.checked;
+        cleanFieldsAndToggle();
+        refreshLibrary();
     } else {
-        const newBook = new Book(newTitle.value, newAuthor, newPages, newRead);
+        const newBook = new Book(
+            inputTitle.value,
+            inputAuthor.value,
+            inputPages.value,
+            inputRead.checked
+        );
         libraryArray.push(newBook);
         cleanFieldsAndToggle();
         refreshLibrary();
     }
+
+    bookToEdit = undefined;
 }
 
 function refreshLibrary() {
@@ -181,12 +192,17 @@ function refreshLibrary() {
 
         const bookActions = document.createElement("div");
         bookActions.classList.add("book-actions");
+
         const btnEditBook = document.createElement("button");
         btnEditBook.textContent = "Edit";
+        //The unique book id is saved also as this btn id-like attribute
+        btnEditBook.setAttribute("bookId", book.id);
+        btnEditBook.addEventListener("click", editBookInLibraryArray);
+
         const btnDeleteBook = document.createElement("button");
         btnDeleteBook.textContent = "Delete";
-        //The unique book id is saved also as this btn id
-        btnDeleteBook.setAttribute("bookId", book.id); 
+        //The unique book id is saved also as this btn id-like attribute
+        btnDeleteBook.setAttribute("bookId", book.id);
         btnDeleteBook.addEventListener("click", deleteBook);
 
         booksContainer.appendChild(bookContainer);
@@ -249,14 +265,12 @@ function sortLibrary() {
 
 function deleteBook() {
     /**
-     * Remove the book with the same ID of the called DeleteButton (bookId) 
+     * Remove the book with the same ID of the called DeleteButton (bookId)
      * from the libraryArray
      */
     libraryArray.splice(
         libraryArray.indexOf(
-            libraryArray.find(({ id }) =>
-                id == this.getAttribute("bookId")
-            )
+            libraryArray.find(({ id }) => id == this.getAttribute("bookId"))
         ),
         1
     );
@@ -264,3 +278,23 @@ function deleteBook() {
     refreshLibrary();
 }
 
+function editBookInLibraryArray() {
+    /**
+     * Edit a created Book instance from the input form fields
+     */
+
+    popup.classList.toggle("show");
+
+    //Save the object to be edited
+    bookToEdit = libraryArray.find(
+        ({ id }) => id == this.getAttribute("bookId")
+    );
+
+    if (bookToEdit !== undefined) {
+        //Prefill the popup fields with the book attributes
+        document.getElementById("input-title").value = bookToEdit.title;
+        document.getElementById("input-author").value = bookToEdit.author;
+        document.getElementById("input-pages").value = bookToEdit.pages;
+        document.getElementById("input-read").checked = bookToEdit.isRead;
+    }
+}
