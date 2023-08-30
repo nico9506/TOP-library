@@ -38,7 +38,9 @@ function Book(title, author, pages, isRead) {
 let sortAsc = true;
 let sortBy = "title"; //title, author, pages, read
 
-/* Testing */
+/* Testing 
+    Books preloaded to be displayed once the site is loaded
+*/
 const test = new Book(
     "Harry Potter and the Philosopher's Stone",
     "J. K. Rowling",
@@ -52,9 +54,9 @@ const test2 = new Book(
     false
 );
 const test3 = new Book(
-    "Sorting array of objects",
-    "developer.mozilla.org",
-    36,
+    "Lord of the Flies",
+    "William Golding",
+    224,
     true
 );
 libraryArray.push(test);
@@ -194,13 +196,14 @@ function refreshLibrary() {
         bookActions.classList.add("book-actions");
 
         const btnEditBook = document.createElement("button");
-        btnEditBook.textContent = "Edit";
+        btnEditBook.innerHTML =
+            "Edit <i class='fa-solid fa-pen-to-square'></i>";
         //The unique book id is saved also as this btn id-like attribute
         btnEditBook.setAttribute("bookId", book.id);
         btnEditBook.addEventListener("click", editBookInLibraryArray);
 
         const btnDeleteBook = document.createElement("button");
-        btnDeleteBook.textContent = "Delete";
+        btnDeleteBook.innerHTML = "Delete <i class='fa-solid fa-trash'></i>";
         //The unique book id is saved also as this btn id-like attribute
         btnDeleteBook.setAttribute("bookId", book.id);
         btnDeleteBook.addEventListener("click", deleteBook);

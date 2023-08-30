@@ -1,6 +1,11 @@
 :root {
-    --color-theme-dark: #282424;
+    --color-theme-dark: #1e1c1c;
     --color-theme-light: #d5cdcd;
+    --color-theme-white: #ffffff;
+    --color-theme-blue-dark: #20263e;
+    --color-theme-orange: #d55222;
+    --color-theme-cream: #caa67e;
+    --color-theme-sky: #274367;
 
     --bar-horizontal-padding: 4rem;
     --library-padding: 3rem;
@@ -15,6 +20,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Ubuntu", sans-serif;
 }
 
 body {
@@ -27,25 +33,31 @@ body {
         "footer";
 }
 
-div {
+/*Used to see borders during the develop process*/
+/* div {
     border: 1px solid black;
-}
+} */
 
 /* --------------------- Top Nav ----------------------- */
 nav {
     width: 100%;
-    background-color: var(--color-theme-dark);
+    background: linear-gradient(
+        var(--color-theme-sky),
+        var(--color-theme-blue-dark)
+    );
     color: var(--color-theme-light);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 var(--bar-horizontal-padding);
     grid-area: topnav;
+    border-bottom: 2px solid var(--color-theme-sky);
 }
 
 nav .logo {
     font-size: 2rem;
     font-weight: bold;
+    color: var(--color-theme-cream);
 }
 
 nav ul {
@@ -55,7 +67,7 @@ nav ul {
 }
 
 nav ul li {
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin: 0 1rem;
     font-weight: bold;
 }
@@ -63,14 +75,19 @@ nav ul li {
 .btn-nav:hover {
     cursor: pointer;
     user-select: none;
-    color: white;
+    color: var(--color-theme-orange);
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--color-theme-dark);
-    color: var(--color-theme-light);
+    right: 0;
+    background: linear-gradient(
+        var(--color-theme-light) 20%,
+        var(--color-theme-white) 35%,
+        var(--color-theme-light) 50%
+    );
+    color: var(--color-theme-dark);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     font-weight: normal;
@@ -81,6 +98,7 @@ nav ul li {
     display: block;
     padding: 0 0.5rem;
     animation: fadeIn 0.5s;
+    font-size: 1.2rem;
 }
 
 #btn-sort:hover .dropdown-content span {
@@ -88,8 +106,9 @@ nav ul li {
 }
 
 #btn-sort:hover .dropdown-content span:hover {
-    /* font-weight: bold; */
-    color: white;
+    font-weight: bold;
+    color: var(--color-theme-white);
+    background-color: var(--color-theme-blue-dark);
     /* text-shadow: 0 0 2px 5px white; */
 }
 
@@ -102,13 +121,21 @@ nav ul li {
     flex-wrap: nowrap;
     justify-content: center;
     overflow: auto;
+    background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        url("media/brick-pattern.png");
+    /*Image by b0red from Pixabay 
+    https://pixabay.com/users/b0red-4473488/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2997965*/
 }
 
 .library-container .books-container {
     width: min(90%, 1200px);
-    padding: var(--library-padding);
+    padding: var(--library-padding) 0;
+    margin: 0 auto;
     display: grid;
-    grid-template: auto / repeat(auto-fill, minmax(350px, 1fr));
+    grid-template: auto / repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
     align-content: flex-start;
     height: fit-content;
@@ -117,6 +144,12 @@ nav ul li {
 .library-container .books-container .book {
     width: 100%;
     height: 280px;
+    border-radius: 10px;
+    border: 1px solid var(--color-theme-blue-dark);
+}
+
+.library-container .books-container .book:hover {
+    box-shadow: 0 0 22px 2px var(--color-theme-white);
 }
 
 .book-title,
@@ -131,11 +164,12 @@ nav ul li {
 
 .book-title {
     height: 35%;
-    background-color: var(--color-theme-dark);
-    color: var(--color-theme-light);
+    background-color: var(--color-theme-blue-dark);
+    color: var(--color-theme-white);
     font-size: var(--fs-title);
     font-weight: bold;
     justify-content: space-between;
+    border-radius: 10px 10px 0px 0px;
 
     /*To prevent long single words to overlap the title box*/
     width: 100%;
@@ -147,12 +181,17 @@ nav ul li {
     height: 20%;
     font-size: var(--fs-author);
     font-weight: bold;
+    color: var(--color-theme-light);
+    background-color: var(--color-theme-sky);
+    font-style: italic;
 }
 
 .book-pages {
     height: 15%;
     font-size: var(--fs-pages);
     font-weight: normal;
+    color: var(--color-theme-dark);
+    background-color: var(--color-theme-light);
 }
 
 .book-pages::before {
@@ -164,6 +203,8 @@ nav ul li {
     height: 15%;
     font-size: var(--fs-read);
     font-weight: normal;
+    color: var(--color-theme-dark);
+    background-color: var(--color-theme-cream);
 }
 
 .book-read::before {
@@ -174,12 +215,22 @@ nav ul li {
 .book-actions {
     height: 15%;
     justify-content: space-between;
-    background-color: var(--color-theme-dark);
+    background-color: var(--color-theme-blue-dark);
+    border-radius: 0 0 10px 10px;
 }
 
 .book-actions button {
-    height: 90%;
-    width: 5rem;
+    height: 70%;
+    width: fit-content;
+    background-color: var(--color-theme-blue-dark);
+    border: none;
+    color: var(--color-theme-light);
+    font-weight: bold;
+}
+
+.book-actions button:hover {
+    cursor: pointer;
+    color: var(--color-theme-orange);
 }
 /* --------------------- Library ----------------------- */
 
@@ -190,8 +241,21 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--bar-horizontal-padding);
-    background-color: var(--color-theme-dark);
     color: var(--color-theme-light);
+    background: linear-gradient(
+        var(--color-theme-dark),
+        var(--color-theme-blue-dark)
+    );
+}
+
+footer .github-contact a {
+    color: var(--color-theme-white);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+footer .github-contact a:hover {
+    color: var(--color-theme-orange);
 }
 
 footer .page-details {
@@ -212,12 +276,15 @@ footer .page-details {
     display: grid;
     grid-template: repeat(7, 1fr) 2fr / 1fr;
     padding: 1rem;
-    background-color: var(--color-theme-dark);
+    background: linear-gradient(
+        var(--color-theme-dark),
+        var(--color-theme-blue-dark)
+    );
     color: var(--color-theme-light);
     border-radius: 10px;
     visibility: hidden;
     z-index: 1;
-    box-shadow: 0 0 5px 5px var(--color-theme-dark);
+    box-shadow: 0 0 2px 2px var(--color-theme-sky);
 }
 
 .show {
@@ -256,6 +323,17 @@ footer .page-details {
     height: 2.5rem;
     align-self: center;
     width: 100%;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 2px;
+    background-color: var(--color-theme-light);
+    color: var(--color-theme-dark);
+}
+
+.popup-new-book .popup-btn-container button:hover {
+    background-color: var(--color-theme-orange);
+    color: var(--color-theme-white);
+    cursor: pointer;
 }
 
 /*field validation in addBookToLibraryArray()*/

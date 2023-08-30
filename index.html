@@ -5,6 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>My Personal Library</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+        <script
+            src="https://kit.fontawesome.com/8b9c8ab9d4.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <nav>
@@ -12,53 +24,53 @@
             <ul>
                 <li>
                     <span class="btn-nav" id="btn-add-book">
-                        Add new Book
+                        <i class="fa-solid fa-circle-plus"></i>
                     </span>
                 </li>
                 <li>
                     <div class="btn-nav" id="btn-sort">
-                        <span>Sort</span>
+                        <span><i class="fa-solid fa-sort"></i></span>
                         <div class="dropdown-content">
-                            <span class="sort-btn" id="sort-asc">Ascendant</span>
-                            <span class="sort-btn" id="sort-des">Descendant</span>
+                            <span class="sort-btn" id="sort-asc"
+                                >Ascendant</span
+                            >
+                            <span class="sort-btn" id="sort-des"
+                                >Descendant</span
+                            >
                             <hr />
                             <h4>Sort by</h4>
                             <span class="sort-btn" id="sort-title">Title</span>
-                            <span class="sort-btn" id="sort-author">Author</span>
-                            <span class="sort-btn" id="sort-pages">Number of Pages</span>
-                            <span class="sort-btn" id="sort-read">Already Read</span>
+                            <span class="sort-btn" id="sort-author"
+                                >Author</span
+                            >
+                            <span class="sort-btn" id="sort-pages"
+                                >Number of Pages</span
+                            >
+                            <span class="sort-btn" id="sort-read"
+                                >Already Read</span
+                            >
                         </div>
                     </div>
                 </li>
-                <li>
+                <!-- <li>
                     <div class="btn-nav" id="btn-filter">Filter</div>
-                </li>
+                </li> -->
             </ul>
         </nav>
 
         <div id="library-container" class="library-container">
-            <div id="books-container" class="books-container">
-                <!-- Basic Book Structure -->
-                <!-- <div class="book">
-                    <div class="book-title">
-                        Fahrenheit 451 <button>Delete</button>
-                    </div>
-                    <div class="book-author">Ray Bradbury</div>
-                    <div class="book-pages">234</div>
-                    <div class="book-read">No</div>
-                </div> -->
-            </div>
+            <div id="books-container" class="books-container"></div>
         </div>
 
         <footer>
             <div class="github-contact">
                 <a target="_blank" href="https://www.github.com/nico9506"
-                    >nico9506</a
+                    ><i class="fa-brands fa-github"></i> nico9506</a
                 >
             </div>
             <div class="page-details">
                 <h3>Copyright © Nicolas Lopez</h3>
-                <p class="editing-date">Aug 20, 2023</p>
+                <p class="editing-date">August, 2023</p>
             </div>
         </footer>
 
@@ -75,6 +87,7 @@
             <label for="input-author">Author</label>
             <input type="text" name="input-author" id="input-author" />
 
+            <!-- only allows numbers as input -->
             <label for="input-pages">Number of pages</label>
             <input
                 type="text"
@@ -92,11 +105,11 @@
             /></label>
 
             <span class="popup-btn-container"
-                ><button id="btn-popup-save-book" type="button">Save</button
+                ><button id="btn-popup-save-book" type="button">
+                    Save <i class="fa-solid fa-circle-check"></i></button
                 ><button id="btn-popup-cancel" type="button">
-                    Cancel
-                </button></span
-            >
+                    Cancel <i class="fa-solid fa-ban"></i></button
+            ></span>
         </div>
 
         <script src="main.js"></script>
