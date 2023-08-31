@@ -53,12 +53,7 @@ const test2 = new Book(
     336,
     false
 );
-const test3 = new Book(
-    "Lord of the Flies",
-    "William Golding",
-    224,
-    true
-);
+const test3 = new Book("Lord of the Flies", "William Golding", 224, true);
 libraryArray.push(test);
 libraryArray.push(test2);
 libraryArray.push(test3);
@@ -190,7 +185,9 @@ function refreshLibrary() {
 
         const bookRead = document.createElement("div");
         bookRead.classList.add("book-read");
-        bookRead.textContent = book.isRead;
+        bookRead.innerHTML = book.isRead
+            ? "<i class='fa-solid fa-check'></i>"
+            : "<i class='fa-solid fa-xmark'></i>";
 
         const bookActions = document.createElement("div");
         bookActions.classList.add("book-actions");
