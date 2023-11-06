@@ -8,29 +8,15 @@ function uniqueID() {
     return Math.floor(Math.random() * Date.now());
 }
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.id = uniqueID();
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+        this.id = uniqueID();
+    }
 }
-
-// Book.prototype.getDetails = function () {
-//     return (
-//         "Title: " +
-//         this.title +
-//         "\n" +
-//         "Author: " +
-//         this.author +
-//         "\n" +
-//         "Number of pages: " +
-//         this.pages +
-//         "\n" +
-//         "Has this book been read?: " +
-//         this.isRead
-//     );
-// };
 
 /**
  * Global variables linked to the sort functions
@@ -54,6 +40,7 @@ const test2 = new Book(
     false
 );
 const test3 = new Book("Lord of the Flies", "William Golding", 224, true);
+
 libraryArray.push(test);
 libraryArray.push(test2);
 libraryArray.push(test3);
